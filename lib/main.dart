@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:weight_control/screens/home_page.dart';
+import 'package:weight_control/screens/tabs/graphics-page.dart';
 
 void main() {
   runApp(MyApp());
