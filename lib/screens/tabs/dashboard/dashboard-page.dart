@@ -1,255 +1,386 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_circular_chart/flutter_circular_chart.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:syncfusion_flutter_gauges/gauges.dart';
+import 'package:weight_control/misc/constants.dart';
 
-class DashboardPage extends StatefulWidget {
-  @override
-  _DashboardPageState createState() => _DashboardPageState();
-}
-
-class _DashboardPageState extends State<DashboardPage> {
-  final GlobalKey<AnimatedCircularChartState> _chartWeightGreyKey =
-      new GlobalKey<AnimatedCircularChartState>();
-
-  final GlobalKey<AnimatedCircularChartState> _chartWeightBlueKey =
-      new GlobalKey<AnimatedCircularChartState>();
-
-  final GlobalKey<AnimatedCircularChartState> _chartWaistGreyKey =
-      new GlobalKey<AnimatedCircularChartState>();
-
-  final GlobalKey<AnimatedCircularChartState> _chartWaistRedKey =
-      new GlobalKey<AnimatedCircularChartState>();
-
-  final currentWeightKey = GlobalKey();
-  final chartKeyContainer = GlobalKey();
-  final startWeightKey = GlobalKey();
-  final endWeightKey = GlobalKey();
-
-  final currentWaistKey = GlobalKey();
-  final chartKeyContainer2 = GlobalKey();
-  final startWaistKey = GlobalKey();
-  final endWaistKey = GlobalKey();
-
-  Size size = Size(0, 0);
-  Size size2 = Size(0, 0);
-  Size sizeOfChartContainer = Size(0, 0);
-
-  Size sizeOfEndWeight = Size(0, 0);
-  double deltaOfEndWeight = 0.0;
-
-  Size sizeOfCurrentWeight = Size(0, 0);
-  double deltaOfCurrentWeightSize = 0.0;
-
-  Size sizeOfStartWeight = Size(0, 0);
-  double deltaOfStartWeight = 0.0;
-
-  Size sizeofCurrentWaist = Size(0, 0);
-  double deltaOfCurrentWaistSize = 0.0;
-
-  @override
-  void initState() {
-    calculateSizeOfWidget();
-    super.initState();
-  }
-
-  void calculateSizeOfWidget() =>
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        final RenderBox boxChartContainer =
-            chartKeyContainer.currentContext.findRenderObject();
-        final RenderBox boxCurrentWeight =
-            currentWeightKey.currentContext.findRenderObject();
-        final RenderBox boxStartWeight =
-            startWeightKey.currentContext.findRenderObject();
-        final RenderBox boxEndWeight =
-            endWeightKey.currentContext.findRenderObject();
-        final RenderBox boxCurrentWaist =
-        currentWaistKey.currentContext.findRenderObject();
-
-        setState(() {
-          sizeOfCurrentWeight = boxCurrentWeight.size;
-          deltaOfCurrentWeightSize = sizeOfCurrentWeight.width / 2;
-
-          sizeOfChartContainer = boxChartContainer.size;
-
-          sizeOfStartWeight = boxStartWeight.size;
-          deltaOfStartWeight = sizeOfStartWeight.width / 2;
-
-          sizeOfEndWeight = boxEndWeight.size;
-          deltaOfEndWeight = sizeOfEndWeight.width / 2;
-
-          sizeofCurrentWaist = boxCurrentWaist.size;
-          deltaOfCurrentWaistSize = sizeofCurrentWaist.width/2;
-        });
-      });
-
+class DashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(colorMain),
       appBar: AppBar(
         title: Text("Сводная информация"),
       ),
-      body: Center(
-        child: Column(
-          children: [
-            Text("Прогресс"),
-            Text("Вес"),
-            buildWeightChart(),
-            Text("Объем талии"),
-            Container(
-              key: chartKeyContainer2,
-              child: Stack(
-                children: [
-                  RotationTransition(
-                    turns: new AlwaysStoppedAnimation(270 / 360),
-                    child: AnimatedCircularChart(
-                      key: _chartWaistGreyKey,
-                      size: const Size(200.0, 200.0),
-                      initialChartData: <CircularStackEntry>[
-                        new CircularStackEntry(
-                          <CircularSegmentEntry>[
-                            new CircularSegmentEntry(
-                              50,
-                              Colors.grey[300],
-                              rankKey: 'remaining',
-                            ),
-                          ],
-                          rankKey: 'progress',
-                        ),
-                      ],
-                      chartType: CircularChartType.Radial,
-                      edgeStyle: SegmentEdgeStyle.round,
-                      percentageValues: true,
-                    ),
-                  ),
-                  RotationTransition(
-                    turns: new AlwaysStoppedAnimation(270 / 360),
-                    child: AnimatedCircularChart(
-                      key: _chartWaistRedKey,
-                      size: const Size(200.0, 200.0),
-                      initialChartData: <CircularStackEntry>[
-                        new CircularStackEntry(
-                          <CircularSegmentEntry>[
-                            new CircularSegmentEntry(
-                              6,
-                              Colors.blue[300],
-                              rankKey: '1',
-                            ),
-                          ],
-                          rankKey: '2',
-                        ),
-                      ],
-                      chartType: CircularChartType.Radial,
-                      edgeStyle: SegmentEdgeStyle.round,
-                      percentageValues: true,
-                    ),
-                  ),
-                  Positioned(
-                    key: currentWaistKey ,
-                    top: sizeOfChartContainer.height / 4,
-                    left: sizeOfChartContainer.width / 2 - deltaOfCurrentWaistSize,
-                    child: Column(
-                      children: [
-                        Text(
-                          "102",
-                          style: TextStyle(
-                            fontSize: 32,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text("-10 cм"),
-                      ],
-                    ),
-                  ),
-                ],
-
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Container buildWeightChart() {
-    return Container(
-      key: chartKeyContainer,
-      child: Stack(
-        children: [
-          RotationTransition(
-            turns: new AlwaysStoppedAnimation(270 / 360),
-            child: AnimatedCircularChart(
-              key: _chartWeightGreyKey,
-              size: const Size(200.0, 200.0),
-              initialChartData: <CircularStackEntry>[
-                new CircularStackEntry(
-                  <CircularSegmentEntry>[
-                    new CircularSegmentEntry(
-                      50,
-                      Colors.grey[300],
-                      rankKey: 'remaining',
-                    ),
-                  ],
-                  rankKey: 'progress',
-                ),
-              ],
-              chartType: CircularChartType.Radial,
-              edgeStyle: SegmentEdgeStyle.round,
-              percentageValues: true,
-            ),
-          ),
-          RotationTransition(
-            turns: new AlwaysStoppedAnimation(270 / 360),
-            child: AnimatedCircularChart(
-              key: _chartWeightBlueKey,
-              size: const Size(200.0, 200.0),
-              initialChartData: <CircularStackEntry>[
-                new CircularStackEntry(
-                  <CircularSegmentEntry>[
-                    new CircularSegmentEntry(
-                      11.3,
-                      Colors.red[300],
-                      rankKey: '1',
-                    ),
-                  ],
-                  rankKey: '2',
-                ),
-              ],
-              chartType: CircularChartType.Radial,
-              edgeStyle: SegmentEdgeStyle.round,
-              percentageValues: true,
-            ),
-          ),
-          Positioned(
-            key: currentWeightKey,
-            top: sizeOfChartContainer.height / 4,
-            left: sizeOfChartContainer.width / 2 - deltaOfCurrentWeightSize,
-            child: Column(
-              children: [
-                Text(
-                  "102",
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: Text(
+                  "Прогресс",
                   style: TextStyle(
-                    fontSize: 32,
+                    fontSize: 26,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Text("-10 кг"),
-              ],
-            ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Column(
+                        children: [
+                          Container(
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              elevation: 4,
+                              color:
+                                  Color(colorContainerWithStartEndValuesWeight),
+                              child: Padding(
+                                padding: const EdgeInsets.all(1.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      LineAwesomeIcons.arrow_circle_up,
+                                      color: Colors.red,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        children: [
+                                          Text("Начальный вес"),
+                                          Text(
+                                            "120 кг",
+                                            style: TextStyle(
+                                              fontSize: 22,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              elevation: 4,
+                              color:
+                                  Color(colorContainerWithStartEndValuesWeight),
+                              child: Padding(
+                                padding: const EdgeInsets.all(1.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      LineAwesomeIcons.arrow_circle_down,
+                                      color: Colors.green,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        children: [
+                                          Text("Желаемый вес"),
+                                          Text(
+                                            "90 кг",
+                                            style: TextStyle(
+                                              fontSize: 22,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        height: 150,
+                        child: SfRadialGauge(
+                          axes: <RadialAxis>[
+                            RadialAxis(
+                              axisLineStyle: AxisLineStyle(
+                                thickness: 0.15,
+                                thicknessUnit: GaugeSizeUnit.factor,
+                                cornerStyle: CornerStyle.bothCurve,
+                              ),
+                              showTicks: false,
+                              showLabels: false,
+                              onAxisTapped: (value) {},
+                              pointers: <GaugePointer>[
+                                RangePointer(
+                                  color: Color(
+                                      colorContainerWithStartEndValuesWeight),
+                                  value: 13,
+                                  onValueChanged: (value) {},
+                                  cornerStyle: CornerStyle.bothCurve,
+                                  onValueChangeEnd: (value) {},
+                                  onValueChanging: (value) {},
+                                  enableDragging: false,
+                                  width: 0.15,
+                                  sizeUnit: GaugeSizeUnit.factor,
+                                ),
+                              ],
+                              annotations: <GaugeAnnotation>[
+                                GaugeAnnotation(
+                                  widget: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text("Сейчас"),
+                                          Text(
+                                            "120",
+                                            style: TextStyle(
+                                              fontSize: 24,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Text("-13 кг"),
+                                    ],
+                                  ),
+                                  positionFactor: 0.05,
+                                  // angle: 0.5,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 40,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Column(
+                        children: [
+                          Container(
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              elevation: 4,
+                              color:
+                                  Color(colorContainerWithStartEndValuesWaist),
+                              child: Padding(
+                                padding: const EdgeInsets.all(1.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      LineAwesomeIcons.arrow_circle_up,
+                                      color: Colors.red,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        children: [
+                                          Text("Начальный объем"),
+                                          Text(
+                                            "120 см",
+                                            style: TextStyle(
+                                              fontSize: 22,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              elevation: 4,
+                              color:
+                                  Color(colorContainerWithStartEndValuesWaist),
+                              child: Padding(
+                                padding: const EdgeInsets.all(1.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      LineAwesomeIcons.arrow_circle_down,
+                                      color: Colors.green,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        children: [
+                                          Text("Желаемый объем"),
+                                          Text(
+                                            "90 см",
+                                            style: TextStyle(
+                                              fontSize: 22,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        height: 150,
+                        child: SfRadialGauge(
+                          axes: <RadialAxis>[
+                            RadialAxis(
+                              axisLineStyle: AxisLineStyle(
+                                thickness: 0.15,
+                                thicknessUnit: GaugeSizeUnit.factor,
+                                cornerStyle: CornerStyle.bothCurve,
+                              ),
+                              showTicks: false,
+                              showLabels: false,
+                              onAxisTapped: (value) {},
+                              pointers: <GaugePointer>[
+                                RangePointer(
+                                  color: Color(
+                                      colorContainerWithStartEndValuesWaist),
+                                  value: 48,
+                                  onValueChanged: (value) {},
+                                  cornerStyle: CornerStyle.bothCurve,
+                                  onValueChangeEnd: (value) {},
+                                  onValueChanging: (value) {},
+                                  enableDragging: false,
+                                  width: 0.15,
+                                  sizeUnit: GaugeSizeUnit.factor,
+                                ),
+                              ],
+                              annotations: <GaugeAnnotation>[
+                                GaugeAnnotation(
+                                  widget: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          FittedBox(
+                                            child: Text("Сейчас"),
+                                          ),
+                                          Text(
+                                            "120",
+                                            style: TextStyle(
+                                              fontSize: 24,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Text("-13 см"),
+                                    ],
+                                  ),
+                                  positionFactor: 0.05,
+                                  // angle: 0.5,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 40,
+              ),
+              GridView.count(
+                shrinkWrap: true,
+                crossAxisCount: 2,
+                crossAxisSpacing: 2,
+                mainAxisSpacing: 2,
+                childAspectRatio: 2.0,
+                padding: EdgeInsets.all(10.0),
+                children: [
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    elevation: 4,
+                    color: Color(colorContainerWithStartEndValuesWaist),
+                    child: Text("111"),
+                  ),
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    elevation: 4,
+                    color: Color(colorContainerWithStartEndValuesWaist),
+                    child: Text("222"),
+
+                  ),
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    elevation: 4,
+                    color: Color(colorContainerWithStartEndValuesWaist),
+                    child: Text("222"),
+
+                  ),
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    elevation: 4,
+                    color: Color(colorContainerWithStartEndValuesWaist),
+                    child: Text("222"),
+
+                  ),
+
+                ],
+              ),
+
+            ],
           ),
-          Positioned(
-            key: startWeightKey,
-            top: sizeOfChartContainer.height / 2 + 7,
-            left: 17 - deltaOfStartWeight / 2,
-            child: Text(
-              "120",
-            ),
-          ),
-          Positioned(
-            key: endWeightKey,
-            top: sizeOfChartContainer.height / 2 + 7,
-            right: 13,
-            child: Text("90"),
-          ),
-        ],
+        ),
       ),
     );
   }

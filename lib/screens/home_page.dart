@@ -166,7 +166,8 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      body: PageStorage(
+      body:
+      PageStorage(
         child: currentScreen,
         bucket: bucket,
       ),
