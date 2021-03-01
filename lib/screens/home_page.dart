@@ -1,9 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:weight_control/screens/tabs/dashboard/dashboard-page.dart';
 import 'file:///C:/FlutterProjects/fromAndroidStudio/weight_control/lib/screens/tabs/graphics-page.dart';
 import 'package:weight_control/screens/tabs/info-page.dart';
 import 'package:weight_control/screens/tabs/something-page.dart';
-
 
 class HomePage extends StatefulWidget {
   @override
@@ -11,12 +11,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
   int currentTab = 0;
 
-  final List<Widget> screens = [
+  List<Widget> screens = [
+    DashboardPage(),
     GraphicsPage(),
     InfoPage(),
-    DashboardPage(),
     SomethingPage(),
   ];
 
