@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
@@ -42,7 +41,7 @@ class DashboardPage extends StatelessWidget {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
-                              elevation: 4,
+                              elevation: 2,
                               color:
                                   Color(colorContainerWithStartEndValuesWeight),
                               child: Padding(
@@ -79,7 +78,7 @@ class DashboardPage extends StatelessWidget {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
-                              elevation: 4,
+                              elevation:2,
                               color:
                                   Color(colorContainerWithStartEndValuesWeight),
                               child: Padding(
@@ -130,8 +129,9 @@ class DashboardPage extends StatelessWidget {
                               onAxisTapped: (value) {},
                               pointers: <GaugePointer>[
                                 RangePointer(
-                                  color: Color(
-                                      colorContainerWithStartEndValuesWeight),
+                                  enableAnimation: true,
+                                  color:
+                                      Colors.red[400],
                                   value: 13,
                                   onValueChanged: (value) {},
                                   cornerStyle: CornerStyle.bothCurve,
@@ -177,7 +177,7 @@ class DashboardPage extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 40,
+                height: 20,
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -192,7 +192,7 @@ class DashboardPage extends StatelessWidget {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
-                              elevation: 4,
+                              elevation: 2,
                               color:
                                   Color(colorContainerWithStartEndValuesWaist),
                               child: Padding(
@@ -229,7 +229,7 @@ class DashboardPage extends StatelessWidget {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
-                              elevation: 4,
+                              elevation: 2,
                               color:
                                   Color(colorContainerWithStartEndValuesWaist),
                               child: Padding(
@@ -280,8 +280,8 @@ class DashboardPage extends StatelessWidget {
                               onAxisTapped: (value) {},
                               pointers: <GaugePointer>[
                                 RangePointer(
-                                  color: Color(
-                                      colorContainerWithStartEndValuesWaist),
+                                  enableAnimation: true,
+                                  color: Colors.blue[300],
                                   value: 48,
                                   onValueChanged: (value) {},
                                   cornerStyle: CornerStyle.bothCurve,
@@ -329,9 +329,22 @@ class DashboardPage extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 40,
+                height: 20,
+              ),
+              Text(
+                "Сводная информация",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                "по весу",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               GridView.count(
+                physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 crossAxisCount: 2,
                 crossAxisSpacing: 2,
@@ -343,7 +356,65 @@ class DashboardPage extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    elevation: 4,
+                    elevation: 2,
+                    color: Color(colorContainerWithStartEndValuesWeight),
+                    child: Text("111"),
+                  ),
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    elevation: 2,
+                    color: Color(colorContainerWithStartEndValuesWeight),
+                    child: Text("222"),
+                  ),
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    elevation: 2,
+                    color: Color(colorContainerWithStartEndValuesWeight),
+                    child: Text("222"),
+                  ),
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    elevation: 2,
+                    color: Color(colorContainerWithStartEndValuesWeight),
+                    child: Text("222"),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                "Сводная информация",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                "по объему талии",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              GridView.count(
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                crossAxisCount: 2,
+                crossAxisSpacing: 2,
+                mainAxisSpacing: 2,
+                childAspectRatio: 2.0,
+                padding: EdgeInsets.all(10.0),
+                children: [
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    elevation: 2,
                     color: Color(colorContainerWithStartEndValuesWaist),
                     child: Text("111"),
                   ),
@@ -351,33 +422,28 @@ class DashboardPage extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    elevation: 4,
+                    elevation: 2,
                     color: Color(colorContainerWithStartEndValuesWaist),
                     child: Text("222"),
-
                   ),
                   Card(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    elevation: 4,
+                    elevation: 2,
                     color: Color(colorContainerWithStartEndValuesWaist),
                     child: Text("222"),
-
                   ),
                   Card(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    elevation: 4,
+                    elevation: 2,
                     color: Color(colorContainerWithStartEndValuesWaist),
                     child: Text("222"),
-
                   ),
-
                 ],
               ),
-
             ],
           ),
         ),
