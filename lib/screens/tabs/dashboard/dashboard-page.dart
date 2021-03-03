@@ -10,6 +10,7 @@ class DashboardPage extends StatelessWidget {
       backgroundColor: Color(colorMain),
       appBar: AppBar(
         title: Text("Сводная информация"),
+        backgroundColor: Color(colorTabNav),
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -343,49 +344,7 @@ class DashboardPage extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              GridView.count(
-                physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                crossAxisCount: 2,
-                crossAxisSpacing: 2,
-                mainAxisSpacing: 2,
-                childAspectRatio: 2.0,
-                padding: EdgeInsets.all(10.0),
-                children: [
-                  Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    elevation: 2,
-                    color: Color(colorContainerWithStartEndValuesWeight),
-                    child: Text("111"),
-                  ),
-                  Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    elevation: 2,
-                    color: Color(colorContainerWithStartEndValuesWeight),
-                    child: Text("222"),
-                  ),
-                  Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    elevation: 2,
-                    color: Color(colorContainerWithStartEndValuesWeight),
-                    child: Text("222"),
-                  ),
-                  Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    elevation: 2,
-                    color: Color(colorContainerWithStartEndValuesWeight),
-                    child: Text("222"),
-                  ),
-                ],
-              ),
+              buildGridWeight(),
               SizedBox(
                 height: 20,
               ),
@@ -401,53 +360,156 @@ class DashboardPage extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              GridView.count(
-                physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                crossAxisCount: 2,
-                crossAxisSpacing: 2,
-                mainAxisSpacing: 2,
-                childAspectRatio: 2.0,
-                padding: EdgeInsets.all(10.0),
-                children: [
-                  Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    elevation: 2,
-                    color: Color(colorContainerWithStartEndValuesWaist),
-                    child: Text("111"),
-                  ),
-                  Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    elevation: 2,
-                    color: Color(colorContainerWithStartEndValuesWaist),
-                    child: Text("222"),
-                  ),
-                  Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    elevation: 2,
-                    color: Color(colorContainerWithStartEndValuesWaist),
-                    child: Text("222"),
-                  ),
-                  Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    elevation: 2,
-                    color: Color(colorContainerWithStartEndValuesWaist),
-                    child: Text("222"),
-                  ),
-                ],
-              ),
+              buildGridWaist(),
             ],
           ),
         ),
       ),
     );
+  }
+
+  GridView buildGridWeight() {
+    return GridView.count(
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              crossAxisCount: 2,
+              crossAxisSpacing: 2,
+              mainAxisSpacing: 2,
+              childAspectRatio: 2.0,
+              padding: EdgeInsets.all(10.0),
+              children: [
+                Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  elevation: 2,
+                  color: Color(colorContainerWithStartEndValuesWaist),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text("7 дней"),
+                          ],
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(LineAwesomeIcons.arrow_down, color: Colors.green,),
+                            SizedBox(width: 10,),
+                            Text("3", style: TextStyle(fontSize: 40,),),
+                            Text("кг", style: TextStyle(fontSize: 20,),),
+                          ],
+                        ),
+                        SizedBox(height: 5,),
+                      ],
+                    ),
+                  ),
+                ),
+                Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  elevation: 2,
+                  color: Color(colorContainerWithStartEndValuesWaist),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text("30 дней"),
+                          ],
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(LineAwesomeIcons.arrow_up, color: Colors.red,),
+                            SizedBox(width: 10,),
+                            Text("3", style: TextStyle(fontSize: 40,),),
+                            Text("кг", style: TextStyle(fontSize: 20,),),
+                          ],
+                        ),
+                        SizedBox(height: 5,),
+                      ],
+                    ),
+                  ),
+                ),
+                Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  elevation: 2,
+                  color: Color(colorContainerWithStartEndValuesWaist),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text("За все время"),
+                          ],
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(LineAwesomeIcons.arrow_down, color: Colors.green,),
+                            SizedBox(width: 10,),
+                            Text("3", style: TextStyle(fontSize: 40,),),
+                            Text("кг", style: TextStyle(fontSize: 20,),),
+                          ],
+                        ),
+                        SizedBox(height: 5,),
+                      ],
+                    ),
+                  ),
+                ),
+                Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  elevation: 2,
+                  color: Color(colorContainerWithStartEndValuesWaist),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text("Среднее значение"),
+                          ],
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+
+                            Text("3", style: TextStyle(fontSize: 40,),),
+                            Text("кг", style: TextStyle(fontSize: 20,),),
+                          ],
+                        ),
+                        SizedBox(height: 5,),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            );
+  }
+
+  GridView buildGridWaist() {
+    return buildGridWeight();
   }
 }
