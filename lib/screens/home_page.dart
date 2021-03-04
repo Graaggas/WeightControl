@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:weight_control/misc/constants.dart';
 import 'package:weight_control/screens/tabs/dashboard/dashboard-page.dart';
 import 'file:///C:/FlutterProjects/fromAndroidStudio/weight_control/lib/screens/tabs/graphics-page.dart';
@@ -31,11 +32,11 @@ class _HomePageState extends State<HomePage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        backgroundColor: Color(colorTabNav),
+        backgroundColor: Colors.blue,
         onPressed: () {},
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Color(colorTabNav),
+        color: Colors.blue,
         shape: CircularNotchedRectangle(),
         child: Container(
           height: 60,
@@ -59,14 +60,14 @@ class _HomePageState extends State<HomePage> {
                         Icon(
                           Icons.dashboard,
                           color: currentTab == 0
-                              ? Colors.red
+                              ? Colors.deepPurple
                               : Colors.white,
                         ),
                         Text(
                           "Сводная",
                           style: TextStyle(
                             color: currentTab == 0
-                                ? Colors.red
+                                ? Colors.deepPurple
                                 : Colors.white,
                           ),
                         ),
@@ -85,16 +86,16 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Icon(
-                          Icons.graphic_eq,
+                          LineAwesomeIcons.area_chart,
                           color: currentTab == 1
-                              ? Colors.red
+                              ? Colors.deepPurple
                               : Colors.white,
                         ),
                         Text(
                           "Графики",
                           style: TextStyle(
                             color: currentTab == 1
-                                ? Colors.red
+                                ? Colors.deepPurple
                                 : Colors.white,
                           ),
                         ),
@@ -120,14 +121,14 @@ class _HomePageState extends State<HomePage> {
                         Icon(
                           Icons.info,
                           color: currentTab == 2
-                              ? Colors.red
+                              ? Colors.deepPurple
                               : Colors.white,
                         ),
                         Text(
                           "О замерах",
                           style: TextStyle(
                             color: currentTab == 2
-                                ? Colors.red
+                                ? Colors.deepPurple
                                 : Colors.white,
                           ),
                         ),
@@ -148,14 +149,14 @@ class _HomePageState extends State<HomePage> {
                         Icon(
                           Icons.face,
                           color: currentTab == 3
-                              ? Colors.red
+                              ? Colors.deepPurple
                               : Colors.white,
                         ),
                         Text(
                           "Что-то",
                           style: TextStyle(
                             color: currentTab == 3
-                                ? Colors.red
+                                ? Colors.deepPurple
                                 : Colors.white,
                           ),
                         ),
