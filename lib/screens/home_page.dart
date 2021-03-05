@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-import 'package:weight_control/misc/constants.dart';
+import 'package:weight_control/screens/tabs/addingPage/adding-values.dart';
 import 'package:weight_control/screens/tabs/dashboard/dashboard-page.dart';
-import 'file:///C:/FlutterProjects/fromAndroidStudio/weight_control/lib/screens/tabs/graphics-page.dart';
+import 'package:weight_control/screens/tabs/graphics-page.dart';
+
 import 'package:weight_control/screens/tabs/info-page.dart';
 import 'package:weight_control/screens/tabs/something-page.dart';
 
@@ -13,7 +14,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   int currentTab = 0;
 
   List<Widget> screens = [
@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         backgroundColor: Colors.blue,
-        onPressed: () {},
+        onPressed: () => AddingValuesPage.show(context),
       ),
       bottomNavigationBar: BottomAppBar(
         color: Colors.blue,
@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
                               : Colors.white,
                         ),
                         Text(
-                          "Сводная",
+                          "Прогресс",
                           style: TextStyle(
                             color: currentTab == 0
                                 ? Colors.deepPurple
@@ -169,8 +169,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      body:
-      PageStorage(
+      body: PageStorage(
         child: currentScreen,
         bucket: bucket,
       ),

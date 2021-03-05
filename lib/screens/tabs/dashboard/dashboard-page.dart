@@ -1,16 +1,20 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:weight_control/misc/constants.dart';
+import 'package:weight_control/model/weight/weight_mobx.dart';
 
 class DashboardPage extends StatelessWidget {
+  final weightMobx = WeightMobx();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(colorMain),
       appBar: AppBar(
-        title: Text("Сводная информация"),
+        title: Text("Прогресс"),
         backgroundColor: Colors.blue,
       ),
       body: SingleChildScrollView(
@@ -19,13 +23,13 @@ class DashboardPage extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 8.0),
-                child: Text(
-                  "Прогресс",
-                  style: TextStyle(
-                    fontSize: 26,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                // child: Text(
+                //   "Прогресс",
+                //   style: TextStyle(
+                //     fontSize: 26,
+                //     fontWeight: FontWeight.bold,
+                //   ),
+                // ),
               ),
               SizedBox(
                 height: 20,
@@ -51,20 +55,22 @@ class DashboardPage extends StatelessWidget {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Icon(
-                                      LineAwesomeIcons.arrow_circle_up,
-                                      color: Colors.red,
-                                    ),
+                                    // Icon(
+                                    //   LineAwesomeIcons.arrow_circle_up,
+                                    //   color: Colors.red,
+                                    // ),
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Column(
                                         children: [
                                           Text("Начальный вес"),
-                                          Text(
-                                            "120 кг",
-                                            style: TextStyle(
-                                              fontSize: 22,
-                                              fontWeight: FontWeight.bold,
+                                          Observer(
+                                            builder: (_) => Text(
+                                              "${weightMobx.startWeight} кг",
+                                              style: TextStyle(
+                                                fontSize: 22,
+                                                fontWeight: FontWeight.bold,
+                                              ),
                                             ),
                                           ),
                                         ],
@@ -88,20 +94,22 @@ class DashboardPage extends StatelessWidget {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Icon(
-                                      LineAwesomeIcons.arrow_circle_down,
-                                      color: Colors.green,
-                                    ),
+                                    // Icon(
+                                    //   LineAwesomeIcons.arrow_circle_down,
+                                    //   color: Colors.green,
+                                    // ),
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Column(
                                         children: [
                                           Text("Желаемый вес"),
-                                          Text(
-                                            "90 кг",
-                                            style: TextStyle(
-                                              fontSize: 22,
-                                              fontWeight: FontWeight.bold,
+                                          Observer(
+                                            builder: (_) => Text(
+                                              "${weightMobx.wantedWeight} кг",
+                                              style: TextStyle(
+                                                fontSize: 22,
+                                                fontWeight: FontWeight.bold,
+                                              ),
                                             ),
                                           ),
                                         ],
@@ -201,10 +209,10 @@ class DashboardPage extends StatelessWidget {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Icon(
-                                      LineAwesomeIcons.arrow_circle_up,
-                                      color: Colors.red,
-                                    ),
+                                    // Icon(
+                                    //   LineAwesomeIcons.arrow_circle_up,
+                                    //   color: Colors.red,
+                                    // ),
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Column(
@@ -238,10 +246,10 @@ class DashboardPage extends StatelessWidget {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Icon(
-                                      LineAwesomeIcons.arrow_circle_down,
-                                      color: Colors.green,
-                                    ),
+                                    // Icon(
+                                    //   LineAwesomeIcons.arrow_circle_down,
+                                    //   color: Colors.green,
+                                    // ),
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Column(
@@ -378,7 +386,7 @@ class DashboardPage extends StatelessWidget {
       childAspectRatio: 2.0,
       padding: EdgeInsets.all(10.0),
       children: [
-        buildCardForAverage("7 дней (кг)", false, 3.0),
+        buildCardForAverage("7 дней (кг)", true, 3.0),
         buildCardForAverage("30 дней (кг)", false, 3.0),
         buildCardForAverage("Все время (кг)", false, 3.0),
         buildCardForAverage("Среднее (кг)", false, 3.0),
@@ -419,7 +427,12 @@ class DashboardPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text(averageValue, style: TextStyle(fontSize: 14,),),
+                Text(
+                  averageValue,
+                  style: TextStyle(
+                    fontSize: 14,
+                  ),
+                ),
               ],
             ),
             SizedBox(
