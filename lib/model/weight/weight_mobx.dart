@@ -38,6 +38,8 @@ abstract class _WeightMobx with Store {
     List<double> r = await dList;
     print(" future initValues = ok");
 
+    r.forEach((element) {print("el = $element");});
+
     wantedWeight = r[0];
     startWeight = r[1];
     currentWeight = r[2];

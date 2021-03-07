@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:hive/hive.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:weight_control/model/weight/weight_model.dart';
@@ -15,8 +16,16 @@ class HiveDatabase {
 
   Future<List<double>> getDummyInit() async{
 
-    final List<double> dList = [90, 151, 129];
-    return dList;
+    WeightModel weightModel = new WeightModel();
+    weightModel.addWantedWeight(91); //wanted;
+    weightModel.addToWeightList(152); //start
+    weightModel.addToWeightList(131);
+
+
+    //final List<double> dList = [90, 151, 129];
+    return weightModel.getValuesList;
+
+
 
   }
 }
