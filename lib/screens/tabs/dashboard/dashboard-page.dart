@@ -2,15 +2,22 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:weight_control/misc/constants.dart';
 import 'package:weight_control/model/weight/weight_mobx.dart';
+import 'package:weight_control/services/database.dart';
+
+
 
 class DashboardPage extends StatelessWidget {
-  final weightMobx = WeightMobx();
+
 
   @override
   Widget build(BuildContext context) {
+    final weightMobx = Provider.of<WeightMobx>(context, listen: false);
+    weightMobx.initValues();
+
     return Scaffold(
       backgroundColor: Color(colorMain),
       appBar: AppBar(
@@ -161,11 +168,13 @@ class DashboardPage extends StatelessWidget {
                                             MainAxisAlignment.center,
                                         children: [
                                           Text("Сейчас"),
-                                          Text(
-                                            "120",
-                                            style: TextStyle(
-                                              fontSize: 24,
-                                              fontWeight: FontWeight.bold,
+                                          Observer(
+                                            builder:(_) => Text(
+                                              "${weightMobx.currentWeight}",
+                                              style: TextStyle(
+                                                fontSize: 24,
+                                                fontWeight: FontWeight.bold,
+                                              ),
                                             ),
                                           ),
                                         ],

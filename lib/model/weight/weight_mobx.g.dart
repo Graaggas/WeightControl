@@ -54,39 +54,11 @@ mixin _$WeightMobx on _WeightMobx, Store {
     });
   }
 
-  final _$_WeightMobxActionController = ActionController(name: '_WeightMobx');
+  final _$initValuesAsyncAction = AsyncAction('_WeightMobx.initValues');
 
   @override
-  void addCurrentWeight(double value) {
-    final _$actionInfo = _$_WeightMobxActionController.startAction(
-        name: '_WeightMobx.addCurrentWeight');
-    try {
-      return super.addCurrentWeight(value);
-    } finally {
-      _$_WeightMobxActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void addStartWeight(double value) {
-    final _$actionInfo = _$_WeightMobxActionController.startAction(
-        name: '_WeightMobx.addStartWeight');
-    try {
-      return super.addStartWeight(value);
-    } finally {
-      _$_WeightMobxActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void addWantedWeight(double value) {
-    final _$actionInfo = _$_WeightMobxActionController.startAction(
-        name: '_WeightMobx.addWantedWeight');
-    try {
-      return super.addWantedWeight(value);
-    } finally {
-      _$_WeightMobxActionController.endAction(_$actionInfo);
-    }
+  Future<void> initValues() {
+    return _$initValuesAsyncAction.run(() => super.initValues());
   }
 
   @override
