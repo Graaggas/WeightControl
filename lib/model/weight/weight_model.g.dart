@@ -17,7 +17,7 @@ class WeightModelAdapter extends TypeAdapter<WeightModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return WeightModel()
-      .._weightList = (fields[1] as List)?.cast<double>()
+      .._weightMap = (fields[1] as Map)?.cast<DateTime, double>()
       .._wantedWeight = fields[2] as double
       .._name = fields[3] as String;
   }
@@ -27,7 +27,7 @@ class WeightModelAdapter extends TypeAdapter<WeightModel> {
     writer
       ..writeByte(3)
       ..writeByte(1)
-      ..write(obj._weightList)
+      ..write(obj._weightMap)
       ..writeByte(2)
       ..write(obj._wantedWeight)
       ..writeByte(3)

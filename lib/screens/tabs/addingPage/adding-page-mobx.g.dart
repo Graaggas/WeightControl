@@ -65,6 +65,17 @@ mixin _$AddingPageMobx on _AddingPageMobx, Store {
   }
 
   @override
+  void addWeight(double value) {
+    final _$actionInfo = _$_AddingPageMobxActionController.startAction(
+        name: '_AddingPageMobx.addWeight');
+    try {
+      return super.addWeight(value);
+    } finally {
+      _$_AddingPageMobxActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 isWeightChecked: ${isWeightChecked},

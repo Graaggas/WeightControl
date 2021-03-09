@@ -9,44 +9,39 @@ abstract class _WeightMobx with Store {
   final hiveDatabase = HiveDatabase();
 
   @observable
-  double startWeight;
+  double startWeight = 0.0;
 
   @observable
-  double currentWeight;
+  double currentWeight = 0.0;
 
   @observable
-  double wantedWeight;
-
-  // @action
-  // void addCurrentWeight(double value) {
-  //   currentWeight = value;
-  // }
-  //
-  // @action
-  // void addStartWeight(double value) {
-  //   startWeight = value;
-  // }
-
-  // @action
-  // void addWantedWeight(double value){
-  //   wantedWeight = value;
-  // }
+  double wantedWeight = 0.0;
 
   @action
-  Future<void> initValues() async {
-    final dList = hiveDatabase.getDummyInit();
-    List<double> r = await dList;
-    print(" future initValues = ok");
+  void updateStartWeight(double value) {
+    print("weight_mobx // startWeight = $startWeight");
+    startWeight = value;
+  }
 
-    r.forEach((element) {print("el = $element");});
+  @action
+  Future<void> updateCurrentWeight() async {
+    print("try to getCurrent in weight_mobx...");
+    // currentWeight = value;
+    final future = await hiveDatabase.getCurrentWeight();
+    currentWeight = future;
+    print("currentWeight = $currentWeight");
+  }
 
-    wantedWeight = r[0];
-    startWeight = r[1];
-    currentWeight = r[2];
+  @action
+  void updateWantedWeight(double value) {
+    wantedWeight = value;
+  }
 
-    print("wanted = $wantedWeight");
-    print("start = $startWeight");
-    print("current = $currentWeight");
-
+  @action
+  Future<void> getInit() async {
+    final future = await hiveDatabase.getInit();
+    wantedWeight = future[0];
+    startWeight = future[1];
+    currentWeight = future[future.length - 1];
   }
 }

@@ -6,17 +6,14 @@ import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 import 'package:weight_control/misc/constants.dart';
 import 'package:weight_control/model/weight/weight_mobx.dart';
-import 'package:weight_control/services/database.dart';
-
-
 
 class DashboardPage extends StatelessWidget {
-
+  //final WeightMobx weightMobx = WeightMobx();
 
   @override
   Widget build(BuildContext context) {
     final weightMobx = Provider.of<WeightMobx>(context, listen: false);
-    weightMobx.initValues();
+    weightMobx.getInit();
 
     return Scaffold(
       backgroundColor: Color(colorMain),
@@ -148,7 +145,7 @@ class DashboardPage extends StatelessWidget {
                                 RangePointer(
                                   enableAnimation: true,
                                   color: Colors.red[400],
-                                  value: 13,
+                                  value: 33.6,
                                   onValueChanged: (value) {},
                                   cornerStyle: CornerStyle.bothCurve,
                                   onValueChangeEnd: (value) {},
@@ -168,13 +165,11 @@ class DashboardPage extends StatelessWidget {
                                             MainAxisAlignment.center,
                                         children: [
                                           Text("Сейчас"),
-                                          Observer(
-                                            builder:(_) => Text(
-                                              "${weightMobx.currentWeight}",
-                                              style: TextStyle(
-                                                fontSize: 24,
-                                                fontWeight: FontWeight.bold,
-                                              ),
+                                          Text(
+                                            "${weightMobx.currentWeight}",
+                                            style: TextStyle(
+                                              fontSize: 24,
+                                              fontWeight: FontWeight.bold,
                                             ),
                                           ),
                                         ],

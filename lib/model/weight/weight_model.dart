@@ -3,33 +3,38 @@ import 'package:hive/hive.dart';
 part 'weight_model.g.dart';
 
 @HiveType(typeId: 1)
-class WeightModel {
+class WeightModel extends HiveObject {
   @HiveField(1)
-  List<double> _weightList = new List<double>();
-  
+  Map<DateTime, double> _weightMap = new Map();
+
   @HiveField(2)
   double _wantedWeight;
-  
+
   @HiveField(3)
   String _name;
 
-  void addToWeightList(double value) {
-    print ("weight_model // adding to List = $value");
-    _weightList.add(value);
+  void addWeight(DateTime dateTime, double value) {
+    _weightMap[dateTime] = value;
   }
 
-  List<double> get getValuesList {
-    List<double> returnedListWithWantedWeight = new List<double>();
-
-    //first add wanted
-    returnedListWithWantedWeight.add(_wantedWeight);
-    //then add another values of start and current
-    _weightList.forEach((element) => returnedListWithWantedWeight.add(element));
-    return returnedListWithWantedWeight;
-
-  }
   void addWantedWeight(double value) {
     _wantedWeight = value;
-    print ("weight_model // wantedWeight = $_wantedWeight");
+  }
+
+  void addName(String name) {
+    _name = name;
+  }
+
+  double get wantedWeight => _wantedWeight;
+
+  Map get weights => _weightMap;
+
+  double lastCurrentWeight() {
+    double res = 0;
+    for (var item in _weightMap.entries) {
+      res = item.value;
+    }
+    print("lastCurrentWeight = $res");
+    return res;
   }
 }

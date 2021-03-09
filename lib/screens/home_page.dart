@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:weight_control/model/weight/weight_mobx.dart';
 import 'package:weight_control/screens/tabs/addingPage/adding-values.dart';
 import 'package:weight_control/screens/tabs/dashboard/dashboard-page.dart';
 import 'package:weight_control/screens/tabs/graphics-page.dart';
@@ -26,6 +28,20 @@ class _HomePageState extends State<HomePage> {
   Widget currentScreen = DashboardPage();
   final PageStorageBucket bucket = PageStorageBucket();
 
+  void _nagigateToNew(BuildContext context) async {
+    final weightMobx = Provider.of<WeightMobx>(context, listen: false);
+    final result = await Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => AddingValuesPage(), fullscreenDialog: true));
+    // AddingValuesPage.show(context);
+    // print("result = $result");
+    if (result) {
+      print("result of pop is true");
+      weightMobx.updateCurrentWeight();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +49,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         backgroundColor: Colors.blue,
-        onPressed: () => AddingValuesPage.show(context),
+        onPressed: () => _nagigateToNew(context),
       ),
       bottomNavigationBar: BottomAppBar(
         color: Colors.blue,
